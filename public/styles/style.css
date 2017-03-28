@@ -46,14 +46,51 @@ footer strong{
 	display: table;
 	width: 100%;
 	height: 100%;
+	text-align: center;
+	padding: 10px 0;
+}
+.container h3{
+	display: table-row;
+	vertical-align: top;
+}
+.main{
+	height: 100%;
+	display: table-cell;
 }
 #start-btn{
 	text-align: center;
 	display: table-cell;
 	vertical-align: middle;
 }
+.activity-section{
+	width: 80%;
+	display: inline-block;
+	height: 100%;
+}
+.status-section{
+	width: 20%;
+	display: inline-block;
+	height: 100%;
+	vertical-align: top;
+	background-color: #95a5a6;
+	padding: 10px;
+	padding-left: 10px!important;
+}
+.status-section li{
+	width: 100%;
+	height: 50px;
+}
+.status-section span{
+	display: block;
+}
+.status-name{
+	float: left;
+}
+.status-hits{
+	float: right;
+}
 .images-wrapper{
-    width: 80%;
+    width: 100%;
     display: table;
     height: 100%;
 }

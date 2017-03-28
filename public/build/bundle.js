@@ -21527,7 +21527,11 @@
 
 	var _activity2 = _interopRequireDefault(_activity);
 
-	var _jquery = __webpack_require__(180);
+	var _status = __webpack_require__(180);
+
+	var _status2 = _interopRequireDefault(_status);
+
+	var _jquery = __webpack_require__(181);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -21551,10 +21555,12 @@
 				activityVisible: false,
 				images: [{
 					id: 1,
+					name: "",
 					address: "images/sb.jpg",
 					hits: 0
 				}, {
 					id: 1,
+					name: "",
 					address: "images/sb.jpg",
 					hits: 0
 				}],
@@ -21569,14 +21575,13 @@
 				return Math.floor(Math.random() * (max - min + 1)) + min;
 			}
 		}, {
-			key: 'componentDidMount',
-			value: function componentDidMount() {
+			key: 'fetchImage',
+			value: function fetchImage() {
 				var count1 = this.randomize(2, 1);
 				var count2 = this.randomize(2, 1);
 				while (count1 == count2) {
 					count2 = this.randomize(2, 1);
 				}
-
 				_jquery2.default.ajax({
 					url: '/scripts',
 					type: "GET",
@@ -21585,19 +21590,43 @@
 						this.setState({
 							images: [{
 								id: response.first[0].id,
+								name: response.first[0].name,
 								address: response.first[0].Address,
 								hits: response.first[0].hits
 							}, {
 								id: response.second[0].id,
+								name: response.second[0].name,
 								address: response.second[0].Address,
 								hits: response.second[0].hits
 							}]
+						});
+						this.fetchStatus();
+					}.bind(this),
+					error: function error(err) {
+						console.log(err);
+					}
+				});
+			}
+		}, {
+			key: 'fetchStatus',
+			value: function fetchStatus() {
+				_jquery2.default.ajax({
+					url: '/fetch',
+					type: "GET",
+					success: function (response) {
+						this.setState({
+							data: response
 						});
 					}.bind(this),
 					error: function error(err) {
 						console.log(err);
 					}
 				});
+			}
+		}, {
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				this.fetchImage();
 			}
 		}, {
 			key: 'update',
@@ -21614,6 +21643,7 @@
 						console.log(err);
 					}
 				});
+				this.fetchImage();
 			}
 		}, {
 			key: 'start',
@@ -21628,7 +21658,17 @@
 				return _react2.default.createElement(
 					'div',
 					{ className: 'container' },
-					this.state.activityVisible ? _react2.default.createElement(_activity2.default, { update: this.update, img: this.state.images }) : _react2.default.createElement(
+					_react2.default.createElement(
+						'h3',
+						null,
+						'\u201CMirror, mirror, on the wall - who is the strongest of them all?\u201D'
+					),
+					this.state.activityVisible ? _react2.default.createElement(
+						'div',
+						{ className: 'main' },
+						_react2.default.createElement(_activity2.default, { update: this.update.bind(this), img: this.state.images }),
+						_react2.default.createElement(_status2.default, { val: this.state.data })
+					) : _react2.default.createElement(
 						'div',
 						{ id: 'start-btn' },
 						_react2.default.createElement(
@@ -21690,36 +21730,40 @@
 
 				return _react2.default.createElement(
 					'div',
-					{ className: 'images-wrapper' },
+					{ className: 'activity-section' },
 					_react2.default.createElement(
-						'section',
-						null,
+						'div',
+						{ className: 'images-wrapper' },
 						_react2.default.createElement(
-							'div',
-							{ className: 'card-image pics', id: this.props.img[0].id, onClick: function onClick() {
-									return _this2.props.update(_this2.props.img[0].id, _this2.props.img[0].hits);
-								} },
-							_react2.default.createElement('img', { src: this.props.img[0].address }),
+							'section',
+							null,
 							_react2.default.createElement(
-								'span',
-								{ className: 'card-title' },
-								'Sabir Ameen'
+								'div',
+								{ className: 'card-image pics', id: this.props.img[0].id, onClick: function onClick() {
+										return _this2.props.update(_this2.props.img[0].id, _this2.props.img[0].hits);
+									} },
+								_react2.default.createElement('img', { src: this.props.img[0].address }),
+								_react2.default.createElement(
+									'span',
+									{ className: 'card-title' },
+									this.props.img[0].name
+								)
 							)
-						)
-					),
-					_react2.default.createElement(
-						'section',
-						null,
+						),
 						_react2.default.createElement(
-							'div',
-							{ className: 'card-image pics', id: this.props.img[1].id, onClick: function onClick() {
-									return _this2.props.update(_this2.props.img[1].id, _this2.props.img[1].hits);
-								} },
-							_react2.default.createElement('img', { src: this.props.img[1].address }),
+							'section',
+							null,
 							_react2.default.createElement(
-								'span',
-								{ className: 'card-title' },
-								'Sabir Ameen'
+								'div',
+								{ className: 'card-image pics', id: this.props.img[1].id, onClick: function onClick() {
+										return _this2.props.update(_this2.props.img[1].id, _this2.props.img[1].hits);
+									} },
+								_react2.default.createElement('img', { src: this.props.img[1].address }),
+								_react2.default.createElement(
+									'span',
+									{ className: 'card-title' },
+									this.props.img[1].name
+								)
 							)
 						)
 					)
@@ -21734,6 +21778,84 @@
 
 /***/ },
 /* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _class = function (_React$Component) {
+		_inherits(_class, _React$Component);
+
+		function _class(props) {
+			_classCallCheck(this, _class);
+
+			return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
+		}
+
+		_createClass(_class, [{
+			key: 'render',
+			value: function render() {
+				var list = this.props.val;
+				return _react2.default.createElement(
+					'ul',
+					{ className: 'status-section' },
+					_react2.default.createElement(
+						'li',
+						null,
+						_react2.default.createElement(
+							'h4',
+							null,
+							'Hercules of Qburst'
+						)
+					),
+					list.map(function (item, index) {
+						return _react2.default.createElement(
+							'li',
+							{ key: index },
+							_react2.default.createElement(
+								'span',
+								{ className: 'status-name' },
+								item.name
+							),
+							_react2.default.createElement(
+								'span',
+								{ className: 'status-hits' },
+								item.hits
+							)
+						);
+					}.bind(this))
+				);
+			}
+		}]);
+
+		return _class;
+	}(_react2.default.Component);
+
+	exports.default = _class;
+
+/***/ },
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!

@@ -20,6 +20,7 @@ app.get('/scripts', function(req, res) {
     var first = req.query.first;
     var second = req.query.second;
     var obj = {};
+    console.log(req.connection.remoteAddress);
     connection.query('select * from details where id=' + first, function(err, rows, fields) {
         obj.first=rows;
     })
@@ -31,9 +32,16 @@ app.get('/scripts', function(req, res) {
 app.get('/update',function(req, res){
 	var hits = req.query.hits;
 	var id = req.query.id;
-	connection.query('update details set hits=' + hits + 'where id=' + id,function(err, rows, fields){
-
+    var query = 'update details set hits=' + hits + ' where id=' + id;
+    console.log("updating")
+	connection.query(query,function(err, rows, fields){
+        res.send(200);
 	})
+})
+app.get('/fetch',function(req, res){
+    connection.query('select * from details',function(err, rows, fields){
+        res.send(rows);
+    })
 })
 
 
