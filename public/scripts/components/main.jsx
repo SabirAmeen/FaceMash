@@ -30,10 +30,10 @@ export default class extends React.Component{
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 	fetchImage(){
-		var count1 = this.randomize(2,1);
-		var count2 = this.randomize(2,1);
+		var count1 = this.randomize(5,1);
+		var count2 = this.randomize(5,1);
 		while(count1==count2){
-			count2 = this.randomize(2,1)
+			count2 = this.randomize(5,1)
 		}
 		$.ajax({
 			url: '/scripts',

@@ -33,7 +33,6 @@ app.get('/update',function(req, res){
 	var hits = req.query.hits;
 	var id = req.query.id;
     var query = 'update details set hits=' + hits + ' where id=' + id;
-    console.log("updating")
 	connection.query(query,function(err, rows, fields){
         res.send(200);
 	})

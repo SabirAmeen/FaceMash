@@ -21577,10 +21577,10 @@
 		}, {
 			key: 'fetchImage',
 			value: function fetchImage() {
-				var count1 = this.randomize(2, 1);
-				var count2 = this.randomize(2, 1);
+				var count1 = this.randomize(5, 1);
+				var count2 = this.randomize(5, 1);
 				while (count1 == count2) {
-					count2 = this.randomize(2, 1);
+					count2 = this.randomize(5, 1);
 				}
 				_jquery2.default.ajax({
 					url: '/scripts',
@@ -21824,7 +21824,7 @@
 						'li',
 						null,
 						_react2.default.createElement(
-							'h4',
+							'h6',
 							null,
 							'Hercules of Qburst'
 						)

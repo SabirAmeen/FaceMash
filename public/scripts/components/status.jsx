@@ -9,7 +9,7 @@ export default class extends React.Component{
 		let list = this.props.val;
 		return(
 			<ul className="status-section">
-				<li><h4>Hercules of Qburst</h4></li>
+				<li><h6>Hercules of Qburst</h6></li>
 				{
 					list.map(function(item, index){
 						return(
