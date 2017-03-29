@@ -80,7 +80,7 @@ export default class extends React.Component{
 	componentDidMount(){
 		this.fetchImage();
 	}
-	update(id,hits){
+	update(id,hits,event){
 		hits = hits+1;
 		$.ajax({
 			url: '/update',

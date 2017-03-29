@@ -21630,7 +21630,7 @@
 			}
 		}, {
 			key: 'update',
-			value: function update(id, hits) {
+			value: function update(id, hits, event) {
 				hits = hits + 1;
 				_jquery2.default.ajax({
 					url: '/update',
@@ -21739,8 +21739,8 @@
 							null,
 							_react2.default.createElement(
 								'div',
-								{ className: 'card-image pics', id: this.props.img[0].id, onClick: function onClick() {
-										return _this2.props.update(_this2.props.img[0].id, _this2.props.img[0].hits);
+								{ className: 'card-image pics', id: this.props.img[0].id, onClick: function onClick(event) {
+										return _this2.props.update(_this2.props.img[0].id, _this2.props.img[0].hits, event);
 									} },
 								_react2.default.createElement('img', { src: this.props.img[0].address }),
 								_react2.default.createElement(
@@ -21755,8 +21755,8 @@
 							null,
 							_react2.default.createElement(
 								'div',
-								{ className: 'card-image pics', id: this.props.img[1].id, onClick: function onClick() {
-										return _this2.props.update(_this2.props.img[1].id, _this2.props.img[1].hits);
+								{ className: 'card-image pics', id: this.props.img[1].id, onClick: function onClick(event) {
+										return _this2.props.update(_this2.props.img[1].id, _this2.props.img[1].hits, event);
 									} },
 								_react2.default.createElement('img', { src: this.props.img[1].address }),
 								_react2.default.createElement(
