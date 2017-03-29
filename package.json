@@ -10,7 +10,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
     "jquery": "^3.1.1",
+    "mysql": "^2.13.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-native-listener": "^1.0.1"
